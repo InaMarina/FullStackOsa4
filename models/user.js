@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = mongoose.Schema({
   //tänne userin tiedot
   username: {
     type: String,
     required: true,
+    unique: true,
+    minlength: 3,
   },
   name: {
     type: String,
@@ -12,6 +15,8 @@ const userSchema = mongoose.Schema({
   },
   passwordHash: {
     type: String,
+    required: true,
+    minlength: 3,
   },
   blogs: [
     {
@@ -20,6 +25,7 @@ const userSchema = mongoose.Schema({
     },
   ],
 });
+userSchema.plugin(uniqueValidator);
 
 userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
