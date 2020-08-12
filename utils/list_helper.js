@@ -39,22 +39,25 @@ const mostBlogs = (blogs) => {
   };
 };
 const mostLikes = (blogs) => {
-  let authors = _.map(blogs, "author");
-  authors = _.uniq(authors);
-  let authorsAndLikes = blogs.map((a) => {
-    return { author: a.author, likes: a.likes };
-  });
-/*
-  return {
-    author: x,
-    likess: _.last(sortedlistBlogs),
-  };
+  if (blogs.length === 0) {
+    return null;
+  }
+
+  const authorBlogs = _.toPairs(_.groupBy(blogs, (b) => b.author));
+  const authorLikes = authorBlogs
+    .map(([author, blogs]) => ({
+      author,
+      likes: blogs.reduce((s, b) => s + b.likes, 0),
+    }))
+    .sort((a1, a2) => a2.likes - a1.likes);
+
+  return authorLikes[0];
 };
 
 const usersInDb = async () => {
   const users = await User.find({});
   return users.map((u) => u.toJSON());
-}; */
+};
 
 module.exports = {
   dummy,
