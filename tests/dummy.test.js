@@ -53,7 +53,41 @@ const blogs = [
     likes: 2,
     __v: 0,
   },
+  {
+    _id: "5a423a851b54a676234d17f7",
+    title: "React patterns",
+    author: "Michael Chan",
+    url: "https://reactpatterns.com/",
+    likes: 7,
+    __v: 0,
+  },
+  {
+    _id: "5a422a851b54a676233d17f7",
+    title: "React patterns",
+    author: "Michael Chan",
+    url: "https://reactpatterns.com/",
+    likes: 7,
+    __v: 0,
+  },
 ];
+describe("author with most blogs and likes", () => {
+  test("returns author with most blogs", () => {
+    const result = listHelper.mostBlogs(blogs);
+
+    expect(result).toEqual({
+      author: "Robert C. Martin",
+      blogs: 3,
+    });
+  });
+  test("returns author with most likes", () => {
+    const result = listHelper.mostLikes(blogs);
+
+    expect(result).toEqual({
+      author: "Edsger W. Dijkstra",
+      likes: 17,
+    });
+  });
+});
 
 describe("total likes", () => {
   const listWithOneBlog = [

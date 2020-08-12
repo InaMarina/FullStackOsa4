@@ -1,11 +1,11 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1hcmluYSIsImlkIjoiNWYyY2VmNTdlZDMyZTE1NzQ0MTQ0MjA2IiwiaWF0IjoxNTk2NzgwNDA2fQ.zE7WP5smzV_ohY7mIRmf4fJy3uGVARl1hmKCQHYyUx0
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5pa28iLCJpZCI6IjVmMmQwNGVhOGVmODc1NDdkYzYwZTE0NCIsImlhdCI6MTU5Njc4NjAyOX0.mzK8DWOq2Rumb35MQIsl88KB4MwK21JUlkQ9H9m1FpE
 
 {
-    "title": "Blog made after creating token",
+    "title": "Blog made after creating middleware",
     "author": "Mluukksi",
     "url": "Url1",
     "likes": 1,
-    "userId": "5f2cef57ed32e15744144206"
+    "userId": "5f2d04ea8ef87547dc60e144"
 }

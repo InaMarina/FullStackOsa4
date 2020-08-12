@@ -21,8 +21,9 @@ blogsRouter.get("/", async (request, response, next) => {
 
 blogsRouter.post("/", async (request, response, next) => {
   const body = request.body;
-  const token = getTokenFrom(request);
-  const decodedToken = jwt.verify(token, process.env.SECRET);
+  // const token = getTokenFrom(request);
+  const token = request.token;
+  const decodedToken = jwt.verify(request.token, process.env.SECRET);
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
@@ -48,13 +49,28 @@ blogsRouter.post("/", async (request, response, next) => {
 });
 
 blogsRouter.delete(":/id", async (request, response, next) => {
+  const token = request.token;
+  const decodedToken = jwt.verify(request.token, process.env.SECRET);
+  if (!token || !decodedToken.id) {
+    return response.status(401).json({ error: "token missing or invalid" });
+  }
+
+  const user = await User.findById(decodedToken.id);
+
   try {
-    await Blog.findByIdAndRemove(request.params.id);
-    response.status(204).end();
+    if (blog.user.toString() === userid.toString()) {
+      await Blog.findByIdAndRemove(request.params.id);
+      response.status(204).end();
+    } else {
+      return response
+        .status(401)
+        .json({ error: "blogs can only be deleted by creator" });
+    }
   } catch (exception) {
     next(exception);
   }
 });
+
 blogsRouter.put("/:id", async (request, response, next) => {
   const body = request.body;
 
